@@ -13,25 +13,55 @@ const count: number = 16;
 
 // Position value
 let positionX: number = 0, 
-    positionY: number = 0;
+    positionY: number = 0,
 
-// Create elements and adjust images
-for(let i = 0; i < count; i++){
-  const $li = document.createElement('li');
-  $li.dataset.index = i + "";
-  $li.classList.add(`list${i}`);
-  $li.style.backgroundPositionX = `-${positionX}00px`;  
-  positionX < 3 ?  positionX++ : (positionX = 0);
+    // createImageTiles함수 반환 배열을 담을 배열
+    titles: HTMLLIElement[] = [];
 
-  if( i <= 4) positionY = 0; 
-  if( i >= 4 && i <= 8 ) positionY = 100;
-  if( i >= 8 && i <= 13 ) positionY = 200;
-  if( i >= 12 && i <= 17 ) positionY = 300;
+
+const createImageTiles = (): HTMLLIElement[] => {
+
+  // 요소를 받을 빈 배열
+  const temArr = [];
+
+  // 요소 생성
+  for(let i = 0; i < count; i++){
+    const $li = document.createElement('li');
+
+    $li.dataset.index = i + "";
+    $li.classList.add(`list${i}`);
+    $li.style.backgroundPositionX = `-${positionX}00px`;  
+
+    positionX < 3 ?  positionX++ : (positionX = 0);
   
-  $li.style.backgroundPositionY = `-${positionY}px`;    
+    if( i <= 4) positionY = 0; 
+    if( i >= 4 && i <= 8 ) positionY = 100;
+    if( i >= 8 && i <= 13 ) positionY = 200;
+    if( i >= 12 && i <= 17 ) positionY = 300;
+    $li.style.backgroundPositionY = `-${positionY}px`;      
 
-  $container.appendChild($li);
+    temArr.push($li);
+  }
+  // 요소가 담긴 배열
+  return temArr;
 }
 
+titles = createImageTiles();
+console.log(titles);
 
+
+const shuffle = <T extends HTMLLIElement[]>( arr: T ): T =>{
+  let index = arr.length - 1;
+
+  while(index > 0){
+    const radomIndex = Math.trunc(Math.random()*(index+1));
+
+    // 배열 요소 스위칭
+    [arr[index], arr[radomIndex]] = [arr[radomIndex], arr[index]];
+
+    index--;
+  }
+
+  return arr;
+}
 
