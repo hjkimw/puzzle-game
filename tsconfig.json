@@ -15,5 +15,5 @@
     "esm":true
   },
   "exclude": ["node_modules","**/*.d.ts"],
-  "include": ["ts/**/*"]
+  "include": ["ts/**/*.ts"]
 }
