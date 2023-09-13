@@ -16,7 +16,7 @@ let positionX: number = 0,
     positionY: number = 0,
 
     // createImageTiles함수 반환 배열을 담을 배열
-    titles: HTMLLIElement[] = [];
+    tiles: HTMLLIElement[] = [];
 
 
 const createImageTiles = (): HTMLLIElement[] => {
@@ -46,10 +46,6 @@ const createImageTiles = (): HTMLLIElement[] => {
   return temArr;
 }
 
-titles = createImageTiles();
-console.log(titles);
-
-
 const shuffle = <T extends HTMLLIElement[]>( arr: T ): T =>{
   let index = arr.length - 1;
 
@@ -64,4 +60,11 @@ const shuffle = <T extends HTMLLIElement[]>( arr: T ): T =>{
 
   return arr;
 }
+
+tiles = createImageTiles();
+
+// suffle함수로 순서가 섞인 배열 요소들을 $container에 추가
+shuffle(tiles).forEach((tile: HTMLElement) => {
+  $container.appendChild(tile);
+})
 
