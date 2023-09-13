@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "allowJs": true,
+    "lib": ["DOM","DOM.Iterable","ESNext"],
+    "strict": true,
+    "strictNullChecks":true,
+    "noImplicitAny":true,
+    "removeComments": true,
+    "moduleDetection": "force",
+    "outDir":"dist",
+  },
+  "ts-node": {
+    "esm":true
+  },
+  "exclude": ["node_modules","**/*.d.ts"],
+  "include": ["ts/**/*"]
+}
