@@ -1,1 +1,47 @@
 @import "reset";
+@import "theme";
+
+.wrap-all{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column nowrap;
+
+  .play-time{
+    font-size: 3rem;
+    margin-top: 2rem;
+    color: var(--facebook);
+  }  
+
+  .image-container{
+    margin-top: 1rem;
+    border: 1px solid var(--facebook);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    & > li{
+      width: 100px;
+      height: 100px;
+      color: var(--white);
+      background-image: url("./../img/2.jpg");
+    }
+  }
+
+  .start-button{
+    background-color: var(--facebook);
+    color: var(--white);
+    padding: 1rem 2rem;
+    margin-top: 1rem;
+    cursor: pointer;
+  }
+
+  .game-text{
+    position: absolute;
+    font-size: 3rem;
+    color: var(--green);
+    text-transform: capitalize;
+    text-shadow: 1px 1px rgaba(0,0,0,0.3);
+    display: none;
+  }
+
+}
