@@ -10,6 +10,13 @@ const $container = $<HTMLUListElement>(".image-container"),
       $gameText = $<HTMLParagraphElement>('.game-text'),
       $playTime = $<HTMLParagraphElement>('.play-time');
 
+// Drag & Drop data
+const dragged: Dragged = {
+  el: null,
+  class: null,
+  index: null,
+}      
+
 const value: Value = {
   positionX: 0, 
   positionY: 0,
@@ -76,7 +83,6 @@ const setGame = () =>{
   setTimeout(() => {
     $container.insertAdjacentHTML("beforeend","");
   
-    
     shuffle(tiles).forEach((tile: HTMLElement) => {
     $container.appendChild(tile);
   })
@@ -86,7 +92,12 @@ const setGame = () =>{
 
 /* Events */
 $container.addEventListener("dragstart",(e: DragEvent) =>{
-  console.log(e);
+  const target = e.target as HTMLLIElement
+  
+  dragged["el"] = target;
+  dragged["class"] = target.className;
+  // target이 부모(container)의 자식요소로 이루어진 배열에서 몇번째 index인지 찾아서 할당
+  dragged["index"] = [...target.parentNode!.children].indexOf(target); 
 })
 $container.addEventListener("dragover",(e: DragEvent) =>{
   // Element 위에 over된 상태에서 놓으면 drop이벤트가 발생되지 않으므로 기본 이벤트 방지해 발생하지 않게 설정
@@ -94,8 +105,18 @@ $container.addEventListener("dragover",(e: DragEvent) =>{
   console.log('over');
 })
 $container.addEventListener("drop",(e: DragEvent) =>{
-  console.log('dropped');
-})
+  const target = e.target as HTMLLIElement;
 
+  let originPlace: HTMLLIElement;
+  let isLast: boolean = false;
+  
+  if(target.className !== dragged["class"]){
+      const droppedIndex = [...target.parentNode!.children].indexOf(target); 
+
+      if(dragged["el"]){
+          dragged.index! > droppedIndex ? target.before(dragged["el"]) : target.after(dragged["el"])
+      };            
+  }
+})
 
 setGame();

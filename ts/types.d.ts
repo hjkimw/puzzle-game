@@ -3,9 +3,9 @@ interface Value {
 }
 
 interface Dragged {
-  el: any,
-  class: any,
-  index: any,
+  el:  Node | null,
+  class: string | null,
+  index: number | null,
 }
 
 export { Value, Dragged };
