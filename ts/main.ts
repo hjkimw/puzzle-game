@@ -106,15 +106,23 @@ $container.addEventListener("dragover",(e: DragEvent) =>{
 })
 $container.addEventListener("drop",(e: DragEvent) =>{
   const target = e.target as HTMLLIElement;
-
-  let originPlace: HTMLLIElement;
-  let isLast: boolean = false;
   
   if(target.className !== dragged["class"]){
+
+      let originPlace: ChildNode;
+      let isLast: boolean = false;
+    
+      if(dragged["el"]?.nextSibling) originPlace = dragged["el"].nextSibling;      
+      else{
+        originPlace = dragged["el"]?.previousSibling!;
+        !isLast
+      }  
+
       const droppedIndex = [...target.parentNode!.children].indexOf(target); 
 
       if(dragged["el"]){
           dragged.index! > droppedIndex ? target.before(dragged["el"]) : target.after(dragged["el"])
+          isLast ? originPlace.after(target) : originPlace.before(target);
       };            
   }
 })
