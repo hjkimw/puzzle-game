@@ -3,6 +3,10 @@
 <br>
 <br>
 
+## 🔗 Link
+https://hjkimw.github.io/puzzle-game/
+<br>
+
 ## 🛠️ Tech Stack
 <span>
 <img src="https://img.shields.io/badge/-TypeScript-%233178C6?style=for-the-badge&logo=TypeScript&logoColor=white">
