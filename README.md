@@ -12,7 +12,7 @@
 
 <br>
 
-## 🎥 데모
+## 🎥 Demo
 <img width="420px" src="https://github.com/hjkimw/puzzle-game/assets/108564335/3aea21c7-7427-4517-b84d-7d11d5ebc330">
 <br>
 <br>
