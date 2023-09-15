@@ -1,10 +1,8 @@
 import { Value, Dragged } from "./types";
 
-// Utils
 const $ = <T extends HTMLElement>(node: string): T => document.querySelector(node) as T;
 const $$ = <T extends NodeListOf<HTMLElement>>(node: string): T => document.querySelectorAll(node) as T;
 
-// DOM
 const $container = $<HTMLUListElement>(".image-container"),
       $startGuideMessage = $<HTMLParagraphElement>('.start-guide-message'),
       $startButton = $<HTMLButtonElement>(".start-button"),
@@ -27,12 +25,11 @@ const value: Value = {
 let { positionX, positionY, tilesLen } = value;
 
 let isPlaying: boolean = false;
-let timeInterval: NodeJS.Timeout;
+let timeInterval: number;
 let time: number = 300;
 let cheatState: boolean = false;
 let anableClick: boolean = true;
 
-// createImageTiles함수 반환 배열을 담을 배열
 let tiles: HTMLLIElement[] = [];
 
 
@@ -58,10 +55,8 @@ const createImageTiles = (): HTMLLIElement[] => {
 
   let randomImg: number = Math.trunc(Math.random() * (6 - 1) + 1);
 
-  // 요소를 받을 빈 배열
   const temArr = [];
 
-  // 요소 생성
   for(let i = 0; i < tilesLen; i++){
     const $li = document.createElement('li');
 
@@ -82,7 +77,7 @@ const createImageTiles = (): HTMLLIElement[] => {
 
     temArr.push($li);
   }
-  // 요소가 담긴 배열
+  
   return temArr;
 }
 
@@ -92,7 +87,6 @@ const shuffle = <T extends HTMLLIElement[]>( arr: T ): T =>{
   while(index > 0){
     const radomIndex = Math.trunc(Math.random()*(index+1));
 
-    // 배열 요소 스위칭
     [arr[index], arr[radomIndex]] = [arr[radomIndex], arr[index]];
 
     index--;
@@ -139,7 +133,6 @@ const setGame = (): void =>{
     $container.appendChild(tile);
   })
 
-  // 일정 시간 뒤 기존에 추가된 요소들 제거 후 suffle함수로 순서가 섞인 배열 요소들을 추가
   setTimeout((): void => {
     $container.innerHTML = '';
   

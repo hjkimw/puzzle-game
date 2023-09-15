@@ -6,6 +6,7 @@
 ## 🔗 Link
 https://hjkimw.github.io/puzzle-game/
 <br>
+<br>
 
 ## 🛠️ Tech Stack
 <span>
