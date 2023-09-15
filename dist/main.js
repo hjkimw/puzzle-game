@@ -25,9 +25,11 @@ const checkStatus = () => {
         $gameText.style.display = "block";
         isPlaying = false;
         clearInterval(timeInterval);
-        alert(`${time}초 남기고 클리어 하셨습니다!`);
         $startGuideMessage.textContent = "🎉 게임을 클리어 하셨습니다!";
         $startGuideMessage.style.color = "green";
+        setTimeout(() => {
+            alert(`${time}초 남기고 클리어 하셨습니다!`);
+        }, 100);
     }
 };
 const createImageTiles = () => {
@@ -72,7 +74,7 @@ const setGame = () => {
         $cheatButton.style.display = 'block';
         clearInterval(timeInterval);
         timeInterval = setInterval(() => {
-            $playTime.textContent = `${time--}`;
+            $playTime.textContent = `${--time}`;
             if (time >= 297) {
                 $playTime.style.color = "royalblue";
             }
