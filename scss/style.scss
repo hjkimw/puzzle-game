@@ -1,6 +1,20 @@
 @import "reset";
 @import "theme";
 
+
+@keyframes TextAni{
+  0%{
+    opacity: 0%;
+  }
+  50%{
+    opacity: 50%;
+  }
+  100%{
+    opacity: 100%;
+  }
+}
+
+
 .wrap-all{
   display: flex;
   justify-content: center;
@@ -34,6 +48,7 @@
     & > li{
       width: 100px;
       height: 100px;
+      padding: .25rem;
       color: var(--white);
       border: 1px solid #ffffff6b;
     }
@@ -53,7 +68,8 @@
   .game-text{
     position: absolute;
     font-size: 3rem;
-    color: var(--green);
+    color:royalblue;
+    text-shadow: 10px 10px 10px #222;
     text-transform: capitalize;
     text-shadow: 1px 1px rgaba(0,0,0,0.3);
     display: none;
@@ -64,6 +80,16 @@
     background-color: #eeeeee7a;
     padding: 1rem;
     border-radius: .25rem;
+  }
+
+  .start-guide-message{
+    transition: opacity .4s ease-in-out;
+    margin-bottom: .875rem;
+    color: royalblue;
+    font-size: 20;
+    font-weight: 600;
+    animation: TextAni .8s infinite linear alternate;
+
   }
 
   .cheat-button{

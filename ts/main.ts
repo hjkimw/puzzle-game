@@ -6,6 +6,7 @@ const $$ = <T extends NodeListOf<HTMLElement>>(node: string): T => document.quer
 
 // DOM
 const $container = $<HTMLUListElement>(".image-container"),
+      $startGuideMessage = $<HTMLParagraphElement>('.start-guide-message'),
       $startButton = $<HTMLButtonElement>(".start-button"),
       $gameText = $<HTMLParagraphElement>('.game-text'),
       $playTime = $<HTMLParagraphElement>('.play-time'),
@@ -27,7 +28,7 @@ let { positionX, positionY, tilesLen } = value;
 
 let isPlaying: boolean = false;
 let timeInterval: NodeJS.Timeout;
-let time: number = 0;
+let time: number = 300;
 let cheatState: boolean = false;
 let anableClick: boolean = true;
 
@@ -40,12 +41,18 @@ const checkStatus = (): void =>{
   const currentList = [...$container.children];
   const unMatchList = currentList.filter((el, i: number)=> +((el as HTMLLIElement).dataset.index || "") !== i )
   
+  console.log(unMatchList);
   // game finish
   if(!unMatchList.length){
     $gameText.style.display = "block";
     isPlaying = false;
     clearInterval(timeInterval);
-  } 
+    alert(`${time}초 남기고 클리어 하셨습니다!`)
+
+    $startGuideMessage.textContent = "🎉 게임을 클리어 하셨습니다!";
+    $startGuideMessage.style.color = "green";
+  }   
+  
 }
 
 const createImageTiles = (): HTMLLIElement[] => {
@@ -97,8 +104,7 @@ const shuffle = <T extends HTMLLIElement[]>( arr: T ): T =>{
 const setGame = (): void =>{
  if(anableClick){
   anableClick = false;
-  isPlaying = true;
-  time = 0;
+  time = 300;
   $container.innerHTML = '';
   $gameText.style.display = 'none';
   $cheatButton.style.display = 'block';
@@ -106,7 +112,21 @@ const setGame = (): void =>{
   clearInterval(timeInterval);
 
   timeInterval = setInterval(()=>{
-    $playTime.textContent = `${time++}`;
+    $playTime.textContent = `${time--}`;
+    if(time >= 297){
+      $playTime.style.color = "royalblue";           
+    }else $playTime.style.color = "white";
+
+
+    if(time >=297){
+      $startGuideMessage.textContent = "👀 이미지를 기억해주세요! ";
+      $startGuideMessage.style.color = "royalblue";
+    }else if(time <= 297){
+      $startGuideMessage.textContent = "🏃 게임이 진행중입니다! ";
+      $startGuideMessage.style.color = "red";
+    }
+    
+    
   },1000)
 
   tiles = createImageTiles();
@@ -121,7 +141,8 @@ const setGame = (): void =>{
   
     shuffle(tiles).forEach((tile: HTMLElement) => {
     $container.appendChild(tile);
-      
+    
+    isPlaying = true;
     anableClick = true;
   })
   }, 5000);
@@ -168,8 +189,9 @@ $container.addEventListener("drop",(e: DragEvent) =>{
       if(dragged["el"]){
           dragged.index! > droppedIndex ? target.before(dragged["el"]) : target.after(dragged["el"])
           isLast ? originPlace.after(target) : originPlace.before(target);
-      };            
+      };                  
   }
+  checkStatus();
 })
 
 $startButton.addEventListener('click',_=> {
