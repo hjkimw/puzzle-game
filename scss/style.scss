@@ -23,7 +23,7 @@
       width: 100px;
       height: 100px;
       color: var(--white);
-      background-image: url("./../img/2.jpg");
+      border: 1px solid #ffffff6b;
     }
   }
 
@@ -33,6 +33,9 @@
     padding: 1rem 2rem;
     margin-top: 1rem;
     cursor: pointer;
+    border-radius: .5rem;
+    font-size: 1.2rem;
+    margin-bottom: .625rem;
   }
 
   .game-text{
@@ -43,5 +46,15 @@
     text-shadow: 1px 1px rgaba(0,0,0,0.3);
     display: none;
   }
+
+  .cheat-button{
+    width: 100px;
+    height: 40px;
+    display: none;
+    background: #000;
+    color: var(--white);
+    border-radius: .5rem;
+    cursor: pointer;
+}
 
 }

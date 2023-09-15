@@ -8,7 +8,8 @@ const $$ = <T extends NodeListOf<HTMLElement>>(node: string): T => document.quer
 const $container = $<HTMLUListElement>(".image-container"),
       $startButton = $<HTMLButtonElement>(".start-button"),
       $gameText = $<HTMLParagraphElement>('.game-text'),
-      $playTime = $<HTMLParagraphElement>('.play-time');
+      $playTime = $<HTMLParagraphElement>('.play-time'),
+      $cheatButton = $<HTMLButtonElement>('.cheat-button');
 
 // Drag & Drop data
 const dragged: Dragged = {
@@ -24,12 +25,31 @@ const value: Value = {
 } 
 let { positionX, positionY, tilesLen } = value;
 
+let isPlaying: boolean = false;
+let timeInterval: NodeJS.Timeout;
+let time: number = 0;
+let cheatState: boolean = false;
+
 // createImageTiles함수 반환 배열을 담을 배열
 let tiles: HTMLLIElement[] = [];
 
 
 /* Functions */
+const checkStatus = (): void =>{
+  const currentList = [...$container.children];
+  const unMatchList = currentList.filter((el, i: number)=> +((el as HTMLLIElement).dataset.index || "") !== i )
+  
+  // game finish
+  if(!unMatchList.length){
+    $gameText.style.display = "block";
+    isPlaying = false;
+    clearInterval(timeInterval);
+  } 
+}
+
 const createImageTiles = (): HTMLLIElement[] => {
+
+  let randomImg: number = Math.trunc(Math.random() * (6 - 1) + 1);
 
   // 요소를 받을 빈 배열
   const temArr = [];
@@ -41,8 +61,9 @@ const createImageTiles = (): HTMLLIElement[] => {
     $li.dataset.index = i + "";
     $li.draggable = true;
     $li.classList.add(`list${i}`);
-    $li.style.backgroundPositionX = `-${positionX}00px`;  
-
+    $li.style.backgroundPositionX = `-${positionX}00px`; 
+    $li.style.backgroundImage =  `url("./img/${randomImg}.jpg")`       
+    
     positionX < 3 ?  positionX++ : (positionX = 0);
   
     if( i <= 4) positionY = 0; 
@@ -72,7 +93,19 @@ const shuffle = <T extends HTMLLIElement[]>( arr: T ): T =>{
   return arr;
 }
 
-const setGame = () =>{
+const setGame = (): void =>{
+  isPlaying = true;
+  time = 0;
+  $container.innerHTML = '';
+  $gameText.style.display = 'none';
+  $cheatButton.style.display = 'block';
+
+  clearInterval(timeInterval);
+
+  timeInterval = setInterval(()=>{
+    $playTime.textContent = (time++).toString();
+  },1000)
+
   tiles = createImageTiles();
 
   tiles.forEach((tile: HTMLElement) => {
@@ -80,31 +113,35 @@ const setGame = () =>{
   })
 
   // 일정 시간 뒤 기존에 추가된 요소들 제거 후 suffle함수로 순서가 섞인 배열 요소들을 추가
-  setTimeout(() => {
-    $container.insertAdjacentHTML("beforeend","");
+  setTimeout((): void => {
+    $container.innerHTML = '';
   
     shuffle(tiles).forEach((tile: HTMLElement) => {
     $container.appendChild(tile);
   })
-  }, 3000);
+  }, 5000);
 }
 
 
 /* Events */
 $container.addEventListener("dragstart",(e: DragEvent) =>{
+  if(!isPlaying) return;
+
   const target = e.target as HTMLLIElement
   
   dragged["el"] = target;
   dragged["class"] = target.className;
-  // target이 부모(container)의 자식요소로 이루어진 배열에서 몇번째 index인지 찾아서 할당
   dragged["index"] = [...target.parentNode!.children].indexOf(target); 
 })
+
 $container.addEventListener("dragover",(e: DragEvent) =>{
-  // Element 위에 over된 상태에서 놓으면 drop이벤트가 발생되지 않으므로 기본 이벤트 방지해 발생하지 않게 설정
   e.preventDefault();
   console.log('over');
 })
+
 $container.addEventListener("drop",(e: DragEvent) =>{
+  if(!isPlaying) return;
+  
   const target = e.target as HTMLLIElement;
   
   if(target.className !== dragged["class"]){
@@ -127,4 +164,23 @@ $container.addEventListener("drop",(e: DragEvent) =>{
   }
 })
 
-setGame();
+$startButton.addEventListener('click',_=> {
+  setGame()
+})
+
+$cheatButton.addEventListener('click',_=>{
+  
+  if(!cheatState){
+    [...$container.children].forEach(el=>{
+      el.textContent = (el as HTMLLIElement).dataset.index || "";
+    })
+  }
+
+   if(cheatState){
+    [...$container.children].forEach(el=>{
+      el.textContent = "";
+    })    
+  }
+  cheatState = !cheatState;  
+})
+
