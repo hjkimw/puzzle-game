@@ -1,0 +1,214 @@
+@charset "UTF-8";
+body {
+  width: 1920px;
+  position: relative;
+}
+body * {
+  box-sizing: border-box;
+}
+
+/* 여백 초기화 */
+body, div, ul, li, dl, dd, dt, ol, h1, h2, h3, h4, h5, h6, input, fieldset, legend, p, select,
+table, th, td, tr, textarea, button, form, figure, figcaption {
+  margin: 0;
+  padding: 0;
+}
+
+/* a 링크 초기화 */
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+/* 폰트 초기화 */
+body, input, textarea, select, button, table {
+  font-family: "Noto Sans KR", sans-serif;
+  font-family: "Noto Sans", sans-serif;
+}
+
+/* 폰트 스타일 초기화 */
+em, address {
+  font-style: normal;
+}
+
+em {
+  color: red;
+}
+
+/* 블릿기호 초기화 */
+ul, li, ol {
+  list-style: none;
+}
+
+/* 제목 태그 초기화 */
+h1, h2, h3, h4, h5, h6 {
+  font-size: 1rem;
+  font-weight: 500;
+  display: inline-block;
+}
+
+/* 버튼초기화 */
+button {
+  border: 0;
+}
+
+/* 반응형 이미지 */
+img, video {
+  width: 100%;
+}
+
+img {
+  width: 100%;
+  vertical-align: top;
+}
+
+img {
+  border: 0;
+}
+
+/* table */
+table {
+  border-collapse: collapse;
+}
+
+/* IR 효과 */
+.ir_pm {
+  display: block;
+  overflow: hidden;
+  font-size: 0;
+  line-height: 0;
+  text-indent: -9999px;
+}
+
+/* 의미있는 이미지의 대체 텍스트를 제공하는 경우(Phark Method) */
+.ir_wa {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}
+
+/* 의미있는 이미지의 대체 텍스트로 이미지가 없어도 대체 텍스트를 보여주고자 할 때(WA IR) */
+.ir_su {
+  overflow: hidden;
+  position: absolute;
+  width: 0;
+  height: 0;
+  line-height: 0;
+  text-indent: -9999px;
+}
+
+/* 대체 텍스트가 아닌 접근성을 위한 숨김 텍스트를 제공할 때 */
+:root {
+  --facebook: #74a0ff;
+  --white: #fff;
+  --green: #67c23a;
+}
+
+@keyframes TextAni {
+  0% {
+    opacity: 0%;
+  }
+  50% {
+    opacity: 50%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+.wrap-all {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column nowrap;
+}
+.wrap-all .play-time-wrap {
+  margin-top: 2rem;
+  background-color: #222;
+  border-radius: 0.375rem;
+  display: flex;
+  align-items: center;
+  width: 170px;
+  height: 70px;
+  justify-content: center;
+  align-items: center;
+}
+.wrap-all .play-time-wrap .time-icon {
+  font-size: 2.625rem;
+  margin-right: 0.625rem;
+}
+.wrap-all .play-time-wrap .play-time {
+  font-size: 3rem;
+  color: var(--white);
+}
+.wrap-all .image-container {
+  width: 402px;
+  height: 402px;
+  background-color: #222;
+  margin-top: 1rem;
+  border: 1px solid var(--facebook);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.wrap-all .image-container > li {
+  width: 100px;
+  height: 100px;
+  padding: 0.25rem;
+  color: var(--white);
+  border: 1px solid rgba(255, 255, 255, 0.4196078431);
+}
+.wrap-all .start-button {
+  background-color: var(--facebook);
+  color: var(--white);
+  padding: 0.625rem 24px;
+  margin-top: 1rem;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  font-size: 1.2rem;
+  margin-bottom: 0.625rem;
+}
+.wrap-all .game-text {
+  position: absolute;
+  font-size: 3rem;
+  color: royalblue;
+  text-shadow: 10px 10px 10px #222;
+  text-transform: capitalize;
+  text-shadow: 1px 1px rgaba(0, 0, 0, 0.3);
+  display: none;
+}
+.wrap-all .explain {
+  margin-bottom: 1rem;
+  background-color: rgba(238, 238, 238, 0.4784313725);
+  padding: 1.125rem;
+  border-radius: 0.25rem;
+}
+.wrap-all .explain li {
+  margin: 4px 0;
+}
+.wrap-all .explain li span {
+  font-weight: bold;
+  color: red;
+}
+.wrap-all .start-guide-message {
+  transition: opacity 0.4s ease-in-out;
+  margin-bottom: 0.875rem;
+  color: royalblue;
+  font-size: 20;
+  font-weight: 600;
+  animation: TextAni 0.8s infinite linear alternate;
+}
+.wrap-all .cheat-button {
+  padding: 12px 16px;
+  display: none;
+  background: #000;
+  color: var(--white);
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=style.css.map */
