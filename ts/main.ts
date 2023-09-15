@@ -40,8 +40,7 @@ let tiles: HTMLLIElement[] = [];
 const checkStatus = (): void =>{
   const currentList = [...$container.children];
   const unMatchList = currentList.filter((el, i: number)=> +((el as HTMLLIElement).dataset.index || "") !== i )
-  
-  console.log(unMatchList);
+    
   // game finish
   if(!unMatchList.length){
     $gameText.style.display = "block";
@@ -113,10 +112,10 @@ const setGame = (): void =>{
 
   timeInterval = setInterval(()=>{
     $playTime.textContent = `${time--}`;
+
     if(time >= 297){
       $playTime.style.color = "royalblue";           
     }else $playTime.style.color = "white";
-
 
     if(time >=297){
       $startGuideMessage.textContent = "👀 이미지를 기억해주세요! ";
@@ -126,6 +125,11 @@ const setGame = (): void =>{
       $startGuideMessage.style.color = "red";
     }
     
+    if(time === 0){
+      alert('게임 오버');
+      clearInterval(timeInterval);
+      $startGuideMessage.textContent = "☠️ 게임 오버되었습니다.";
+    }
     
   },1000)
 
