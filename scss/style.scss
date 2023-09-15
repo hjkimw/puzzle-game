@@ -7,13 +7,25 @@
   align-items: center;
   flex-flow: column nowrap;
 
-  .play-time{
-    font-size: 3rem;
-    margin-top: 2rem;
-    color: var(--facebook);
-  }  
 
+  .play-time-wrap{
+    margin-top: 2rem;
+    padding: 4px 20px;
+    background-color: #222;
+    border-radius: .375rem;
+    
+    .play-time{
+      font-size: 3rem;
+      width: 200px;    
+      color: var(--white);
+    }    
+  }
+
+  
   .image-container{
+    width: 402px;
+    height: 402px;
+    background-color: #222;
     margin-top: 1rem;
     border: 1px solid var(--facebook);
     display: grid;
@@ -30,7 +42,7 @@
   .start-button{
     background-color: var(--facebook);
     color: var(--white);
-    padding: 1rem 2rem;
+    padding: .625rem 24px;
     margin-top: 1rem;
     cursor: pointer;
     border-radius: .5rem;
@@ -45,6 +57,13 @@
     text-transform: capitalize;
     text-shadow: 1px 1px rgaba(0,0,0,0.3);
     display: none;
+  }
+
+  .explain{
+    margin-bottom: 1rem;
+    background-color: #eeeeee7a;
+    padding: 1rem;
+    border-radius: .25rem;
   }
 
   .cheat-button{

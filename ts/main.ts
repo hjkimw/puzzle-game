@@ -29,6 +29,7 @@ let isPlaying: boolean = false;
 let timeInterval: NodeJS.Timeout;
 let time: number = 0;
 let cheatState: boolean = false;
+let anableClick: boolean = true;
 
 // createImageTiles함수 반환 배열을 담을 배열
 let tiles: HTMLLIElement[] = [];
@@ -94,6 +95,8 @@ const shuffle = <T extends HTMLLIElement[]>( arr: T ): T =>{
 }
 
 const setGame = (): void =>{
+ if(anableClick){
+  anableClick = false;
   isPlaying = true;
   time = 0;
   $container.innerHTML = '';
@@ -103,7 +106,7 @@ const setGame = (): void =>{
   clearInterval(timeInterval);
 
   timeInterval = setInterval(()=>{
-    $playTime.textContent = (time++).toString();
+    $playTime.textContent = `${time++}`;
   },1000)
 
   tiles = createImageTiles();
@@ -118,8 +121,13 @@ const setGame = (): void =>{
   
     shuffle(tiles).forEach((tile: HTMLElement) => {
     $container.appendChild(tile);
+      
+    anableClick = true;
   })
   }, 5000);
+ }else{
+  alert('3초 뒤에 재시작 할 수 있습니다.')
+ }
 }
 
 
@@ -169,17 +177,20 @@ $startButton.addEventListener('click',_=> {
 })
 
 $cheatButton.addEventListener('click',_=>{
+
+  const childNodes = [...$container.children];
   
   if(!cheatState){
-    [...$container.children].forEach(el=>{
+    childNodes.forEach(el=>{
       el.textContent = (el as HTMLLIElement).dataset.index || "";
-    })
+    })    
+    $cheatButton.textContent = "👀 치트키 OFF";
   }
-
    if(cheatState){
-    [...$container.children].forEach(el=>{
+    childNodes.forEach((el: Element) =>{
       el.textContent = "";
     })    
+    $cheatButton.textContent = "👀 치트키 ON";    
   }
   cheatState = !cheatState;  
 })
