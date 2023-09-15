@@ -9,10 +9,11 @@
 <img src="https://img.shields.io/badge/-Sass-%23CC6699?style=for-the-badge&logo=Sass&logoColor=white">
 </span>
 <br>
+
 <br>
 
 ## 🎥 데모
-<img width="420px" src="https://github.com/hjkimw/puzzle-game/assets/108564335/f0db9a18-4975-4920-b255-bf5120c00fb0">
+<img width="420px" src="https://github.com/hjkimw/puzzle-game/assets/108564335/3aea21c7-7427-4517-b84d-7d11d5ebc330">
 <br>
 <br>
 
